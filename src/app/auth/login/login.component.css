@@ -1,0 +1,41 @@
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f7f6;
+  height: 100vh;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt {
+  margin-top: 16px;
+}
+
+.mb-4 {
+  margin-bottom: 24px;
+}
+
+.form-title {
+  font-weight: bold;
+  color: #2e7d32; /* Verde institucional */
+  margin-top: 8px;
+}
+
+.custom-shadow {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}

@@ -1,0 +1,24 @@
+.busqueda-global {
+  display: flex;
+  justify-content: 	flex-end;
+  margin-bottom: 10px;
+}
+
+.busqueda-global input {
+  width: 300px;
+}
+.ag-theme-alpine .ag-row {
+  font-size: 13px;       /* Tamaño de texto */
+  line-height: 1.2;      /* Espaciado vertical */
+  padding-top: 0px;      /* Elimina espacio arriba */
+  padding-bottom: 0px;   /* Elimina espacio abajo */
+}
+@media (max-width: 768px) {
+  .ag-theme-alpine .ag-header-cell-label {
+    font-size: 12px;
+  }
+  .ag-theme-alpine .ag-cell {
+    font-size: 12px;
+    padding: 4px;
+  }
+}

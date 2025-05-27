@@ -1,0 +1,52 @@
+<div class="container mt-3">
+    <h2 class="text-center"><i class="fa-solid fa-users"></i>  Gestión de Usuarios</h2>
+
+    <!-- Botón para agregar un nuevo usuario -->
+    <button class="btn btn-primary mb-1" (click)="openAddModal()"><i class="fa-solid fa-floppy-disk"></i>
+
+    </button>
+
+   <button class="btn btn-success  me-2" >
+    <i class="fa-regular fa-file-excel"></i>
+  </button>
+
+  <app-tabla-ag [columnDefs]="columnas" [rowData]="usuarios"></app-tabla-ag>
+
+    <!-- Modal para agregar o editar un usuario -->
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="userModalLabel"><i class="fa-solid fa-user-plus"></i>   {{ isEdit ? 'Actualizar Usuario' : 'Agregar Usuario' }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="saveUsuario()">
+              <div class="mb-3">
+                <label for="roles" class="form-label">Rol</label>
+                <select class="form-select" id="roles" [(ngModel)]="usuario.role" name="role">
+                  <option value="ADMINISTRADOR">ADMINISTRADOR DEL SISTEMA</option>
+                  <option value="RECEPCIONISTA">RECEPCIONISTA</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                 <input type="text" id="name" [(ngModel)]="usuario.name" name="name" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">Nombre de Usuario</label>
+                <input type="text" id="username" [(ngModel)]="usuario.username" name="username" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" [(ngModel)]="usuario.password" name="password" class="form-control" required />
+              </div>
+
+              <button type="submit" class="btn btn-primary">{{ isEdit ? 'Actualizar' : 'Registrar' }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,51 @@
+<div class="container-center">
+  <mat-card class="verify-card custom-shadow">
+    <h3 class="text-center form-title mb-2">Verificación 2FA</h3>
+
+    <p class="text-center mb-2">
+      Se ha enviado un código de verificación al correo:
+      <strong>{{ username }}</strong>
+    </p>
+
+    <p class="text-center small-text mb-3">
+      Ingrese el código antes de que expire. Tiempo restante:
+      <strong>{{ minutes }}:{{ seconds | number: '2.0' }}</strong>
+    </p>
+
+    <form (ngSubmit)="verifyCode()" *ngIf="!expired">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Código de verificación</mat-label>
+        <input
+          matInput
+          [(ngModel)]="code"
+          name="code"
+          id="code"
+          maxlength="6"
+          required
+          inputmode="numeric"
+          placeholder="Ej. 123456"
+        />
+      </mat-form-field>
+
+      <div class="text-center mt">
+        <button mat-raised-button color="primary" type="submit" [disabled]="expired">
+          Verificar
+        </button>
+      </div>
+      <!-- ... (anterior contenido) ... -->
+
+<p *ngIf="expired" class="text-center text-danger mt">
+  El código ha expirado.
+</p>
+
+<div *ngIf="expired  " class="text-center mt">
+  <button routerLink="/login" mat-button color="accent" >Enviar otra vez</button>
+</div>
+
+    </form>
+
+    <p *ngIf="expired" class="text-center text-danger mt">
+      El código ha expirado. Por favor, solicita uno nuevo.
+    </p>
+  </mat-card>
+</div>

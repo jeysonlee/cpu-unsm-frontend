@@ -1,0 +1,88 @@
+sss{
+    color: rgb(64, 8, 94);
+    background-color: crimson;
+}
+
+.icon-small {
+  width: 26px; /* Ajusta el tamaño según tus necesidades */
+  height: 26px;
+  
+}
+
+.btn-edit {
+    background-color: rgb(222, 237, 11); /* Color de fondo de respaldo */
+    border: none; /* Opcional: para eliminar el borde del botón */
+    width: 35px; /* Ajusta el tamaño del botón */
+    height: 35px; /* Ajusta el tamaño del botón */
+    background-image: url('https://d2d53p2jiiazhe.cloudfront.net/frontend_resources/goiababet/web/avatar/police.png'); /* URL de la imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el botón */
+    background-position: center; /* Centra la imagen en el botón */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
+   /* display: flex; /* Usar Flexbox para centrar el contenido del botón */
+    align-items: center; 
+    justify-content: center;
+    padding: 0; /* Sin relleno adicional */
+    margin: 2px; /* Margen alrededor del botón */
+  }
+  
+  .btn-edit:hover {
+    background-color: rgb(159, 168, 110); /* Cambia el color de fondo al pasar el mouse */
+  }
+
+  .btn-eliminar {
+    background-color: rgb(243, 12, 12); /* Color de fondo de respaldo */
+    border: none; /* Opcional: para eliminar el borde del botón */
+    width: 35px; /* Ajusta el tamaño del botón */
+    height: 35px; /* Ajusta el tamaño del botón */
+    background-image: url('https://c0.klipartz.com/pngpicture/557/438/gratis-png-icono-de-mensaje-de-error-iconos-de-advertencia.png'); /* URL de la imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el botón */
+    background-position: center; /* Centra la imagen en el botón */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
+   /* display: flex; /* Usar Flexbox para centrar el contenido del botón */
+    align-items: center; 
+    justify-content: center;
+    padding: 0; /* Sin relleno adicional */
+    margin: 2px; /* Margen alrededor del botón */
+  }
+  
+  .btn-eliminar:hover {
+    background-color: rgb(169, 132, 132); /* Cambia el color de fondo al pasar el mouse */
+  }
+
+
+  
+  .btn-editar {
+    background-color: rgb(248, 252, 255); /* Color de fondo de respaldo */
+    border: none; /* Opcional: para eliminar el borde del botón */
+    width: 28px; /* Ajusta el tamaño del botón */
+    height: 28px; /* Ajusta el tamaño del botón */
+    background-image: url('https://cdn-icons-png.flaticon.com/128/13132/13132551.png'); /* URL de la imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el botón */
+    background-position: center; /* Centra la imagen en el botón */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
+   /* display: flex; /* Usar Flexbox para centrar el contenido del botón */
+    align-items: center; 
+    justify-content: center;
+    padding: 0; /* Sin relleno adicional */
+    margin: 2px; /* Margen alrededor del botón */
+  }
+  
+  .btn-editar:hover {
+    background-color: rgb(78, 133, 158); /* Cambia el color de fondo al pasar el mouse */
+  }
+
+  .table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  

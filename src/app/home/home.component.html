@@ -1,0 +1,60 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <div class="container d-flex align-items-center justify-content-between w-100">
+    <div class="d-flex align-items-center gap-2">
+      <img src="https://cpu.unsm.edu.pe./imagenes/logo.png" width="40" height="40" alt="Logo">
+      <span class="text-xl font-bold">CPU UNSM</span>
+    </div>
+    <div class="d-none d-md-flex align-items-center gap-3">
+      <button mat-button (click)="scrollTo('inicio')">Inicio</button>
+      <button mat-button (click)="scrollTo('ofrecemos')">Qué ofrecemos</button>
+      <button mat-button (click)="scrollTo('nosotros')">Sobre nosotros</button>
+      <button mat-button (click)="scrollTo('contacto')">Contáctanos</button>
+      <button mat-raised-button color="accent" routerLink="/login">Iniciar Sesión</button>
+      <!-- <button mat-raised-button color="warn" routerLink="/register">Registrarse</button> -->
+    </div>
+  </div>
+</mat-toolbar>
+
+<div class="pt-24 bg-white">
+  <!-- HERO -->
+  <section id="inicio" class="text-white bg-gradient-to-r from-green-700 to-cyan-500 py-32 text-center">
+    <h1 class="text-5xl font-bold mb-4">Bienvenido al CPU UNSM</h1>
+    <p class="text-xl mb-6">Centro Pre Universitario de la Universidad Nacional de San Martín</p>
+    <button mat-raised-button color="accent" (click)="scrollTo('ofrecemos')">Descubre más</button>
+  </section>
+
+  <!-- OFRECEMOS -->
+  <section id="ofrecemos" class="bg-white py-20 text-center">
+    <h2 class="text-4xl font-bold text-green-800 mb-10">¿Qué ofrecemos?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8">
+      <mat-card *ngFor="let item of beneficios" class="transition-transform hover:scale-105">
+        <mat-card-title class="text-cyan-700">{{ item.titulo }}</mat-card-title>
+        <mat-card-content class="text-gray-700">{{ item.descripcion }}</mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="bg-cyan-50 py-20 text-center">
+    <h2 class="text-4xl font-bold text-green-700 mb-6">Sobre Nosotros</h2>
+    <p class="max-w-3xl mx-auto text-lg text-gray-700">
+      El CPU UNSM es un programa oficial que brinda preparación académica a jóvenes con aspiración universitaria.
+    </p>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="bg-white py-20 text-center">
+    <h2 class="text-4xl font-bold text-green-700 mb-6">Contáctanos</h2>
+    <p>📍 Jr. Lima 123, Tarapoto - San Martín</p>
+    <p>📞 (042) 123456</p>
+    <p>📧 contactopu.unsm.edu.pe</p>
+    <a href="https://wa.me/51999999999" target="_blank">
+      <button mat-raised-button color="primary" class="mt-4">Escríbenos por WhatsApp</button>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-100 text-center text-sm py-4 text-gray-600">
+    © {{ currentYear }} CPU UNSM · Angular 16
+  </footer>
+</div>
