@@ -1,3 +1,57 @@
+/* === COLORES PERSONALIZADOS === */
+:root {
+  --color-primary: #0097a7;   /* Cyan 700 */
+  --color-accent: #43a047;    /* Green 600 */
+  --color-warn: #e53935;      /* Red 600 */
+  --color-bg: #f4f4f4;        /* Plomo claro */
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* === APLICA A TODO EL BODY === */
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  background-color: var(--color-bg);
+}
+
+/* === PERSONALIZA ANGULAR MATERIAL USANDO SELECTORES === */
+
+/* Cambia color del toolbar */
+.mat-toolbar {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Botones básicos */
+.mat-button, .mat-raised-button {
+  font-weight: bold;
+}
+
+/* Botón de tipo primary */
+.mat-raised-button.mat-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Botón de tipo accent */
+.mat-raised-button.mat-accent {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Cards */
+mat-card {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+mat-card:hover {
+  transform: scale(1.02);
+}
+
+/* Footer */
+footer {
+  background-color: #e0e0e0; /* gris */
+  color: #555;
+  padding: 1rem;
+  text-align: center;
+}
