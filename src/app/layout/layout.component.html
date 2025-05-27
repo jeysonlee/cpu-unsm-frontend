@@ -1,118 +1,64 @@
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar -->
-    <div class="bg-dark border-right" id="sidebar-wrapper">
-        <div class="sidebar-header">
-            <img src="#" alt="Logo" class="logo-img">
-        </div>
-            <!-- Role Section -->
-    <div class="text-center text-light mb-3">
-        {{ obtenerRole() }}dd
-      </div>
-        <ul class="sidebar-nav">
-            <!-- Módulo Configuraciones -->
-            <li class="nav-item" >
-                <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><i class="fa-solid fa-house"></i> INICIO</a>
-            </li>
-            <!-- Otros elementos de la barra lateral -->
-            <li class="nav-item" *ngIf="hasPermission(['ROLE_RECEPCIONISTA', 'ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                <a class="nav-link" routerLink="/recepciones" routerLinkActive="active"><i class="fa-solid fa-book-open"></i> Recepcion</a>
-            </li>
-
-            <li class="nav-item" *ngIf="hasPermission(['ROLE_ADMINISTRADOR'])">
-                <a class="nav-link" routerLink="/usuarios" routerLinkActive="active"><i class="fa-regular fa-user"></i> Usuarios</a>
-            </li>
-
-            <li class="nav-item" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                <a class="nav-link" routerLink="/clientes" routerLinkActive="active"><i class="fa-solid fa-user-group"></i> Clientes</a>
-            </li>
-            <li class="nav-item dropdown" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                <a class="nav-link dropdown-toggle" href="#" id="configurationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                    REPORTES
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="configurationsDropdown">
-                    <li class="nav-item" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="nav-link" routerLink="/salidas-habitacion" routerLinkActive="active"><i class="fa-solid fa-dollar-sign"></i> Salidas</a>
-                    </li>
-
-                    <li class="nav-item" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="nav-link" routerLink="/lista-reservas" routerLinkActive="active"><i class="fa-solid fa-book"></i> Reservas</a>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="nav-item dropdown" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA','ROLE_ADMINISTRADOR_EMPRESA'])">
-                <a class="nav-link dropdown-toggle" href="#" id="configurationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-scale-balanced"></i>
-                    Movimientos de Caja
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="configurationsDropdown">
-                    <li *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/cajas" routerLinkActive="active"><i class="fa-solid fa-money-bill-transfer"></i> Cajas</a>
-                    </li>
-                    <li *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA'])">
-                        <a class="dropdown-item" routerLink="/aperturas_cajas" routerLinkActive="active"><i class="fa-solid fa-hand-holding-dollar"></i> Aperturas de cajas </a>
-                    </li>
-                    <li *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/cajas-chicas" routerLinkActive="active"><i class="fa-solid fa-money-bill-trend-up"></i> Cajas chicas </a>
-                    </li>
-                    <li *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA'])">
-                        <a class="dropdown-item" routerLink="/m-cajas-chicas" routerLinkActive="active"><i class="fa-solid fa-hand-holding-dollar"></i>  Movimientos de Cajas chicas </a>
-                    </li>
-                    <li *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/rembolsos" routerLinkActive="active"><i class="fa-solid fa-hand-holding-dollar"></i>  rembolsos </a>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="nav-item dropdown" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_RECEPCIONISTA'])">
-                <a class="nav-link dropdown-toggle" href="#" id="configurationsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-gear"></i>
-                    Configuraciones
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="configurationsDropdown">
-                    <li *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/hoteles" routerLinkActive="active"><i class="fa-solid fa-hotel"></i> Hoteles</a>
-                    </li>
-                    <li *ngIf="hasPermission(['ROLE_RECEPCIONISTA', 'ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/habitaciones" routerLinkActive="active"><i class="fa-solid fa-bed"></i> Habitaciones</a>
-                    </li>
-                    <li *ngIf="hasPermission([ 'ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/categorias-habitacion" routerLinkActive="active"> <i class="fa-solid fa-list"></i> Categorías</a>
-                    </li>
-                    <li *ngIf="hasPermission([ 'ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-                        <a class="dropdown-item" routerLink="/niveles-habitacion" routerLinkActive="active"><i class="fa-solid fa-elevator"></i> Niveles</a>
-                    </li>
-
-                </ul>
-            </li>
-
-        </ul>
+<mat-sidenav-container class="layout-container">
+  <!-- Sidebar -->
+  <mat-sidenav mode="side" opened class="sidebar">
+    <div class="sidebar-header">
+      <img src="https://cpu.unsm.edu.pe/imagenes/logo.png" alt="Logo" class="logo-img">
+      <div class="text-center text-light mt-2">{{ obtenerRole() }}</div>
     </div>
 
-    <!-- Página de contenido -->
-    <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <div><button class="btn btn-light" id="menu-toggle" (click)="toggleMenu()"><i class="fa-solid fa-bars"></i></button></div>
-            <div class="navbar-collapse-wrapper">
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav ms-auto mt-2 mt--0">
-                        <li class="nav-item">
-                           <button class="btn"
-                            [ngClass]="isAuthenticated ? 'btn-dark' : 'btn-success'"
-                            (click)="isAuthenticated ? logout() : login()">
-                            <i class="fa-solid fa-power-off"></i>
-                            {{ isAuthenticated ? obtenerName() : 'Iniciar sesión' }}
-                          </button>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+      </a>
 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+      <a mat-list-item *ngIf="hasPermission(['ROLE_RECEPCIONISTA', 'ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])" routerLink="/recepciones" routerLinkActive="active">
+        <mat-icon>book</mat-icon>
+        <span>Recepción</span>
+      </a>
 
-        <div  class="container mt-5 sss"><router-outlet></router-outlet></div>
+      <a mat-list-item *ngIf="hasPermission(['ROLE_ADMINISTRADOR'])" routerLink="/usuarios" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <span>Usuarios</span>
+      </a>
 
+      <a mat-list-item *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])" routerLink="/clientes" routerLinkActive="active">
+        <mat-icon>group</mat-icon>
+        <span>Clientes</span>
+      </a>
 
+      <!-- Menú desplegable con mat-menu -->
+      <mat-menu #reportesMenu="matMenu">
+        <button mat-menu-item routerLink="/salidas-habitacion">
+          <mat-icon>attach_money</mat-icon> Salidas
+        </button>
+        <button mat-menu-item routerLink="/lista-reservas">
+          <mat-icon>library_books</mat-icon> Reservas
+        </button>
+      </mat-menu>
+      <button mat-list-item [matMenuTriggerFor]="reportesMenu" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
+        <mat-icon>description</mat-icon>
+        <span>Reportes</span>
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Página principal -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z4 justify-between">
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{ title }}</span>
+      <button mat-raised-button [color]="isAuthenticated ? 'warn' : 'accent'" (click)="isAuthenticated ? logout() : login()">
+        <mat-icon>power_settings_new</mat-icon>
+        {{ isAuthenticated ? obtenerName() : 'Iniciar sesión' }}
+      </button>
+    </mat-toolbar>
+      <div>
+      <router-outlet></router-outlet>
     </div>
-</div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

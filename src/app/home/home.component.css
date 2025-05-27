@@ -7,39 +7,39 @@
   padding: 80px 20px;
   background: linear-gradient(to right, #00796b, #00bcd4);
   color: white;
+}
 
-  h1 {
-    font-size: 3rem;
-    font-weight: bold;
-  }
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
 
-  p {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-  }
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
 }
 
 .section {
   padding: 60px 20px;
   text-align: center;
+}
 
-  h2 {
-    color: #00796b; 
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
+.section h2 {
+  color: #00796b;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
 
-  .card-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
 
-    mat-card {
-      width: 300px;
-    }
-  }
+.card-container mat-card {
+  width: 300px;
 }
 
 .cyan-bg {

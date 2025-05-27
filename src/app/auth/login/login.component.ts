@@ -16,6 +16,7 @@ export class LoginComponent {
   registerName: string = '';
   registerEmail: string = '';
   registerPassword: string = '';
+  isLoading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -33,8 +34,10 @@ export class LoginComponent {
   }
 
 login() {
+  this.isLoading = true;
   this.authService.login(this.username, this.password).subscribe(
     (response) => {
+      this.isLoading = false;
       if (response.requires2fa) {
         localStorage.setItem('temp_user', this.username);
         Swal.fire('Código requerido', 'Revisa tu correo para ingresar el código 2FA', 'info').then(() => {
@@ -46,30 +49,36 @@ login() {
         Swal.fire('Error', 'Respuesta inesperada del servidor.', 'error');
       }
     },
-    () => this.handleLoginError()
+    () => {
+      this.isLoading = false;
+      this.handleLoginError();
+    }
   );
 }
 
 
-  register() {
-    const user = {
-      name: this.registerName,
-      username: this.registerEmail,
-      password: this.registerPassword
-    };
+register() {
+  this.isLoading = true;
+  const user = {
+    name: this.registerName,
+    username: this.registerEmail,
+    password: this.registerPassword
+  };
 
-    this.authService.registerPublicUser(user).subscribe(
-      () => {
-        Swal.fire('Registro exitoso', 'Revisa tu correo para el código de verificación', 'success').then(() => {
-          this.router.navigate(['/verificar-codigo'], { queryParams: { username: this.registerEmail } });
-        });
-      },
-      (error) => {
-        console.error(error);
-        Swal.fire('Error', 'No se pudo completar el registro.', 'error');
-      }
-    );
-  }
+  this.authService.registerPublicUser(user).subscribe(
+    () => {
+      this.isLoading = false;
+      Swal.fire('Registro exitoso', 'Revisa tu correo para el código de verificación', 'success').then(() => {
+        this.router.navigate(['/verificar-codigo'], { queryParams: { username: this.registerEmail } });
+      });
+    },
+    (error) => {
+      this.isLoading = false;
+      console.error(error);
+      Swal.fire('Error', 'No se pudo completar el registro.', 'error');
+    }
+  );
+}
 
   private handleSuccessLogin(token: string) {
     this.authService.setToken(token);

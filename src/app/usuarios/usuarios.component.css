@@ -1,87 +1,76 @@
-.sss{
-    
-  background-color: rgb(234, 232, 232);
+.usuarios-container {
+  padding: 24px;
+  max-width: 2000px;
+  margin: auto;
 }
 
-.icon-small {
-width: 26px; /* Ajusta el tamaño según tus necesidades */
-height: 26px;
-
+.usuarios-card {
+  padding: 20px;
 }
 
-.btn-edit {
-  background-color: rgb(222, 237, 11); /* Color de fondo de respaldo */
-  border: none; /* Opcional: para eliminar el borde del botón */
-  width: 35px; /* Ajusta el tamaño del botón */
-  height: 35px; /* Ajusta el tamaño del botón */
-  background-image: url('https://d2d53p2jiiazhe.cloudfront.net/frontend_resources/goiababet/web/avatar/police.png'); /* URL de la imagen */
-  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el botón */
-  background-position: center; /* Centra la imagen en el botón */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
- /* display: flex; /* Usar Flexbox para centrar el contenido del botón */
-  align-items: center; 
-  justify-content: center;
-  padding: 0; /* Sin relleno adicional */
-  margin: 2px; /* Margen alrededor del botón */
+.text-center {
+  text-align: center;
 }
 
-.btn-edit:hover {
-  background-color: rgb(159, 168, 110); /* Cambia el color de fondo al pasar el mouse */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.btn-eliminar {
-  background-color: rgb(243, 12, 12); /* Color de fondo de respaldo */
-  border: none; /* Opcional: para eliminar el borde del botón */
-  width: 35px; /* Ajusta el tamaño del botón */
-  height: 35px; /* Ajusta el tamaño del botón */
-  background-image: url('https://c0.klipartz.com/pngpicture/557/438/gratis-png-icono-de-mensaje-de-error-iconos-de-advertencia.png'); /* URL de la imagen */
-  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el botón */
-  background-position: center; /* Centra la imagen en el botón */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
- /* display: flex; /* Usar Flexbox para centrar el contenido del botón */
-  align-items: center; 
-  justify-content: center;
-  padding: 0; /* Sin relleno adicional */
-  margin: 2px; /* Margen alrededor del botón */
-}
-
-.btn-eliminar:hover {
-  background-color: rgb(169, 132, 132); /* Cambia el color de fondo al pasar el mouse */
-}
-
-
-
-.btn-editar {
-  background-color: rgb(248, 252, 255); /* Color de fondo de respaldo */
-  border: none; /* Opcional: para eliminar el borde del botón */
-  width: 28px; /* Ajusta el tamaño del botón */
-  height: 28px; /* Ajusta el tamaño del botón */
-  background-image: url('https://cdn-icons-png.flaticon.com/128/13132/13132551.png'); /* URL de la imagen */
-  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el botón */
-  background-position: center; /* Centra la imagen en el botón */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse sobre el botón */
- /* display: flex; /* Usar Flexbox para centrar el contenido del botón */
-  align-items: center; 
-  justify-content: center;
-  padding: 0; /* Sin relleno adicional */
-  margin: 2px; /* Margen alrededor del botón */
-}
-
-.btn-editar:hover {
-  background-color: rgb(78, 133, 158); /* Cambia el color de fondo al pasar el mouse */
-}
-
-.table {
-  margin-top: 20px;
+.full-width {
   width: 100%;
-  border-collapse: collapse;
 }
 
-.table th, .table td {
-  padding: 5px;
-  text-align: left;
-  border: 1px solid #0b0b0b;
+.form-card {
+  max-width: 500px;
+  margin: auto;
+  padding: 24px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.dialog-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.dialog-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+  background-color: white;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
 }

@@ -30,5 +30,10 @@ onQuickFilterChanged(event: Event) {
   this.quickFilterValue = input.value;
   this.agGrid.api.setQuickFilter(this.quickFilterValue);
 }
+clearFilter() {
+  this.quickFilterValue = '';
+  this.agGrid.api.setQuickFilter('');
+}
+
 
 }

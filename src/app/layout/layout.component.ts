@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnDestroy {
-  title = 'Minimarket Concesita';
+  title = 'Centro de Universitario UNSM';
   currentRoute: string = '';
   isAuthenticated: boolean = false;
   private routerEventsSubscription: Subscription;
@@ -81,7 +81,6 @@ hasPermission(requiredAuthorities: string[]): boolean {
    }
 obtenerName(): string {
   const info = this.authService.getUserInfo();
-  console.log(info);
   return info && info.name ? info.name : 'Invitado';
 }
 

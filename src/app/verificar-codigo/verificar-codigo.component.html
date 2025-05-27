@@ -27,11 +27,19 @@
         />
       </mat-form-field>
 
-      <div class="text-center mt">
-        <button mat-raised-button color="primary" type="submit" [disabled]="expired">
-          Verificar
-        </button>
-      </div>
+    <div class="text-center mt">
+      <button mat-raised-button color="primary" type="submit" [disabled]="expired || isLoading">
+        <mat-progress-spinner
+          *ngIf="isLoading"
+          diameter="20"
+          mode="indeterminate"
+          color="accent"
+          style="vertical-align: middle; margin-right: 8px;"
+        ></mat-progress-spinner>
+        <span *ngIf="!isLoading">Verificar</span>
+      </button>
+    </div>
+
       <!-- ... (anterior contenido) ... -->
 
 <p *ngIf="expired" class="text-center text-danger mt">

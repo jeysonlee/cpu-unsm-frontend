@@ -15,6 +15,8 @@ export class VerificarCodigoComponent implements OnDestroy {
   minutes: number = 1;
   seconds: number = 59;
   expired: boolean = false;
+  isLoading: boolean = false;
+
   private timer: any;
 
   constructor(
@@ -47,21 +49,27 @@ export class VerificarCodigoComponent implements OnDestroy {
     }, 1000);
   }
 
-  verifyCode() {
-    if (this.expired) return;
+verifyCode() {
+  if (this.expired || this.isLoading) return;
 
-    this.authService.verify2fa(this.username, this.code).subscribe(
-      res => {
-        this.authService.setToken(res.jwt);
-        localStorage.removeItem('temp_user');
+  this.isLoading = true;
 
-        Swal.fire('Bienvenido', 'Código verificado correctamente', 'success').then(() => {
-          this.router.navigate(['/dashboard']);
-        });
-      },
-      () => Swal.fire('Error', 'Código inválido o expirado', 'error')
-    );
-  }
+  this.authService.verify2fa(this.username, this.code).subscribe(
+    res => {
+      this.authService.setToken(res.jwt);
+      localStorage.removeItem('temp_user');
+      this.isLoading = false;
+
+      Swal.fire('Bienvenido', 'Código verificado correctamente', 'success').then(() => {
+        this.router.navigate(['/dashboard']);
+      });
+    },
+    () => {
+      this.isLoading = false;
+      Swal.fire('Error', 'Código inválido o expirado', 'error');
+    }
+  );
+}
 
   ngOnDestroy(): void {
     clearInterval(this.timer);

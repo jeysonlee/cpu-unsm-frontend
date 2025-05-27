@@ -17,35 +17,32 @@ export class UsuariosComponent implements OnInit {
   usuario: Usuario = new Usuario();
   isEdit: boolean = false;
   columnas: any[] = [];
+  showDialog: boolean = false;
 
   constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit(): void {
     this.getUsuarios();
 
-    this.columnas = [
-      { headerName: 'ID', field: 'id' },
-      { headerName: 'Nombre', field: 'name' },
-      { headerName: 'Usuario', field: 'username' },
-      { headerName: 'Rol', field: 'role' },
-      {
-        headerName: 'Acciones',
-        cellRenderer: (params: any) => {
-          return `
-            <button class="btn btn-sm btn-warning editar-btn">✏️</button>
-            <button class="btn btn-sm btn-danger eliminar-btn">🗑️</button>
-          `;
-        },
-        onCellClicked: (params: any) => {
-          if (params.event.target.classList.contains('editar-btn')) {
-            this.editUsuario(params.data);
-          }
-          if (params.event.target.classList.contains('eliminar-btn')) {
-            this.deleteUsuario(params.data.id);
-          }
-        }
-      }
-    ];
+this.columnas = [
+  { headerName: 'ID', field: 'id' },
+  { headerName: 'Nombre', field: 'name' },
+  { headerName: 'Usuario', field: 'username' },
+  { headerName: 'Rol', field: 'role' },
+  {
+    headerName: 'Acciones',
+    cellRenderer: () => {
+      return `
+        <span class="acciones-cell">
+          <button class="editar-btn" title="Editar">✏️</button>
+          <button class="eliminar-btn" title="Eliminar">🗑️</button>
+        </span>
+      `;
+    },
+    onCellClicked: (params: any) => this.handleAccionUsuario(params)
+  }
+];
+
   }
 
   // Obtener la lista de usuarios
@@ -59,6 +56,15 @@ export class UsuariosComponent implements OnInit {
       }
     );
   }
+handleAccionUsuario(params: any) {
+  const target = params.event.target as HTMLElement;
+
+  if (target.closest('.editar-btn')) {
+    this.editUsuario(params.data); // Pasa todo el objeto usuario
+  } else if (target.closest('.eliminar-btn')) {
+    this.deleteUsuario(params.data.id);
+  }
+}
 
   // Registrar un nuevo usuario
   saveUsuario(): void {
@@ -88,12 +94,13 @@ export class UsuariosComponent implements OnInit {
     this.closeModal();
   }
 
-  // Editar un usuario
-  editUsuario(usuario: Usuario): void {
-    this.usuario = { ...usuario };
-    this.isEdit = true;
-    this.openAddModal();
-  }
+// Editar un usuario
+editUsuario(usuario: Usuario): void {
+  this.usuario = { ...usuario, password: '' }; // Vaciamos la contraseña al clonar el objeto
+  this.isEdit = true;
+  this.showDialog = true;
+}
+
 
   // Eliminar un usuario
   deleteUsuario(id: number | undefined): void {
@@ -123,24 +130,17 @@ export class UsuariosComponent implements OnInit {
   }
 
   // Abrir el modal de agregar nuevo usuario
-  openAddModal(): void {
-    const modalElement = document.getElementById('userModal');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
-  }
+openAddModal(usuario?: Usuario): void {
+  this.usuario = usuario ? { ...usuario } : new Usuario();
+  this.isEdit = !!usuario;
+  this.showDialog = true;
+}
 
-  // Cerrar el modal
-  closeModal(): void {
-    const modalElement = document.getElementById('userModal');
-    if (modalElement) {
-      const modal = bootstrap.Modal.getInstance(modalElement);
-      modal.hide();
-    };
-    this.resetForm();
+closeModal(): void {
+  this.showDialog = false;
+  this.resetForm();
+}
 
-  }
 
   // Resetear el formulario
   resetForm(): void {
