@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'verificar-codigo',
     component: VerificarCodigoComponent,
-    canActivate: [VerificarCodigoGuard]
+    canActivate: [VerificarCodigoGuard] // 👈 protección agregada
   },
   { path: '', canActivate: [RedirectGuard], component: HomeComponent },
   {
@@ -26,14 +26,12 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // ✅ redirección por defecto al dashboard
       { path: 'dashboard', component: DashboardComponent },
       { path: 'usuarios', component: UsuariosComponent }
     ]
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' } // ✅ comodín al inicio
+  { path: '**', canActivate: [RedirectGuard], component: HomeComponent }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
