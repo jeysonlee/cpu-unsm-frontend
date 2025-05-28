@@ -39,3 +39,16 @@
 .custom-shadow {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
+/* login.component.css o global */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}

@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'verificar-codigo',
     component: VerificarCodigoComponent,
-    canActivate: [VerificarCodigoGuard] // 👈 protección agregada
+    canActivate: [VerificarCodigoGuard] // si lo estás usando
   },
   { path: '', canActivate: [RedirectGuard], component: HomeComponent },
   {

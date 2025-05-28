@@ -68,6 +68,7 @@ register() {
   this.authService.registerPublicUser(user).subscribe(
     () => {
       this.isLoading = false;
+      localStorage.setItem('temp_user', this.registerEmail); // ✅ Esto es lo que faltaba
       Swal.fire('Registro exitoso', 'Revisa tu correo para el código de verificación', 'success').then(() => {
         this.router.navigate(['/verificar-codigo'], { queryParams: { username: this.registerEmail } });
       });
