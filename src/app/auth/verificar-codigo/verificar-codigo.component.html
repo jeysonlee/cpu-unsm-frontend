@@ -42,16 +42,14 @@
 
       <!-- ... (anterior contenido) ... -->
 
-<p *ngIf="expired" class="text-center text-danger mt">
-  El código ha expirado.
-</p>
 
+
+
+
+    </form>
 <div *ngIf="expired  " class="text-center mt">
   <button routerLink="/login" mat-button color="accent" >Enviar otra vez</button>
 </div>
-
-    </form>
-
     <p *ngIf="expired" class="text-center text-danger mt">
       El código ha expirado. Por favor, solicita uno nuevo.
     </p>

@@ -1,0 +1,52 @@
+<div class="usuarios-container">
+  <mat-card class="usuarios-card">
+    <h2 class="mat-headline text-center">
+      <mat-icon>menu</mat-icon> Gestión de Módulos
+    </h2>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="openAddModal()">
+        <mat-icon>add</mat-icon> Nuevo Módulo
+      </button>
+    </div>
+
+    <app-tabla-ag [columnDefs]="columnas" [rowData]="modulos"></app-tabla-ag>
+  </mat-card>
+
+  <div *ngIf="showDialog" class="dialog-container">
+    <mat-card class="form-card">
+      <h3>
+        <mat-icon>menu</mat-icon> {{ isEdit ? 'Actualizar Módulo' : 'Agregar Módulo' }}
+      </h3>
+
+      <form (ngSubmit)="saveModulo()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput [(ngModel)]="modulo.nombre" name="nombre" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>URL</mat-label>
+          <input matInput [(ngModel)]="modulo.url" name="url" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Módulo Padre (opcional)</mat-label>
+          <mat-select [(ngModel)]="modulo.padre" name="padre">
+            <mat-option [value]="null">-- Ninguno --</mat-option>
+            <mat-option *ngFor="let padre of modulos" [value]="padre">
+              {{ padre.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">
+            {{ isEdit ? 'Actualizar' : 'Registrar' }}
+          </button>
+          <button mat-button type="button" (click)="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

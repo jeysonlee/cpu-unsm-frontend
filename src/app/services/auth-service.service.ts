@@ -9,13 +9,15 @@ export interface DecodedToken {
   id: number;
   name: string;
   sub: string;
-  permissions: Array<{ authority: string }>;
+  permissions: string[]; // ✅ CAMBIADO AQUÍ
   iat: number;
   exp: number;
 }
 
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  //private apiUrl = 'http://localhost:8080/auth'; // Cambia esto a tu URL de API real
   private apiUrl = 'https://cpu-unsm-app.onrender.com/auth';
 
   constructor(private http: HttpClient) {}
@@ -94,4 +96,20 @@ export class AuthService {
   private isValidJWT(token: string): boolean {
     return token.includes('.') && token.split('.').length === 3;
   }
+requestPasswordReset(email: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+}
+
+validateResetCode(email: string, code: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/validate-code`, { email, code });
+}
+
+updatePassword(email: string, newPassword: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/update-password`, {
+    email,
+    newPassword
+  });
+}
+
+
 }

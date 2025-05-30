@@ -6,15 +6,19 @@ import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { VerificarCodigoComponent } from './verificar-codigo/verificar-codigo.component'; // Importa tu nuevo componente
+import { VerificarCodigoComponent } from './auth/verificar-codigo/verificar-codigo.component'; // Importa tu nuevo componente
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RedirectGuard } from './guards/redirect.guard';
 import { VerificarCodigoGuard } from './guards/verificar-codigo.guard';
+import { RegisterComponent } from './auth/register/register.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 //import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'welcome', component: HomeComponent },
+  {path: 'forgot-password',component: ForgotPasswordComponent },
   {
     path: 'verificar-codigo',
     component: VerificarCodigoComponent,

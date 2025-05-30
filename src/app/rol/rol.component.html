@@ -1,0 +1,39 @@
+<div class="usuarios-container">
+  <mat-card class="usuarios-card">
+    <h2 class="mat-headline text-center">
+      <mat-icon>security</mat-icon> Gestión de Roles
+    </h2>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="openAddModal()">
+        <mat-icon>add</mat-icon> Nuevo Rol
+      </button>
+    </div>
+
+    <app-tabla-ag [columnDefs]="columnas" [rowData]="roles"></app-tabla-ag>
+  </mat-card>
+
+  <div *ngIf="showDialog" class="dialog-container">
+    <mat-card class="form-card">
+      <h3>
+        <mat-icon>security</mat-icon> {{ isEdit ? 'Actualizar Rol' : 'Agregar Rol' }}
+      </h3>
+
+      <form (ngSubmit)="saveRol()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput [(ngModel)]="rol.nombre" name="nombre" required />
+        </mat-form-field>
+
+
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">
+            {{ isEdit ? 'Actualizar' : 'Registrar' }}
+          </button>
+          <button mat-button type="button" (click)="closeModal()">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

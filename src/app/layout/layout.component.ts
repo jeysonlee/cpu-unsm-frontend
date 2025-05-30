@@ -33,13 +33,12 @@ export class LayoutComponent implements OnDestroy {
   isDashboardRoute(): boolean {
     return this.currentRoute.startsWith('/dashboard');
   }
-
-hasPermission(requiredAuthorities: string[]): boolean {
+hasPermission(requiredPermissions: string[]): boolean {
   const decoded = this.authService.decodeToken();
   if (!decoded || !decoded.permissions) return false;
 
-  const authorities = decoded.permissions.map(p => p.authority);
-  return requiredAuthorities.some(req => authorities.includes(req));
+  // Ahora `permissions` ya es un array de strings como ['ACCEDER']
+  return requiredPermissions.some(req => decoded.permissions.includes(req));
 }
 
   toggleMenu() {

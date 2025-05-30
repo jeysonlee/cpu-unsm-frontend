@@ -13,7 +13,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
-import { VerificarCodigoComponent } from './verificar-codigo/verificar-codigo.component';
+import { VerificarCodigoComponent } from './auth/verificar-codigo/verificar-codigo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -30,6 +30,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RegisterComponent } from './auth/register/register.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { RolComponent } from './rol/rol.component';
+import { ModulosComponent } from './modulos/modulos.component';
 
 
 @NgModule({
@@ -42,6 +46,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     DashboardComponent,
     UsuariosComponent,
     VerificarCodigoComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    RolComponent,
+    ModulosComponent,
   ],
   imports: [
 

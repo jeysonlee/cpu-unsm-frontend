@@ -2,11 +2,10 @@
   <mat-card class="login-card custom-shadow">
     <div class="text-center mb-4">
       <img src="https://cpu.unsm.edu.pe./imagenes/logo.png" width="60" alt="Logo CPU UNSM">
-      <h2 class="form-title">{{ showRegister ? 'REGISTRARSE' : 'INICIAR SESIÓN' }}</h2>
+      <h2 class="form-title">INICIAR SESIÓN</h2>
     </div>
 
-    <!-- FORMULARIO DE LOGIN -->
-    <form *ngIf="!showRegister" (ngSubmit)="login()" #loginForm="ngForm">
+    <form (ngSubmit)="login()" #loginForm="ngForm">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Correo</mat-label>
         <input matInput [(ngModel)]="username" name="username" required>
@@ -17,7 +16,7 @@
         <input matInput type="password" [(ngModel)]="password" name="password" required>
       </mat-form-field>
 
-      <!-- BOTÓN LOGIN -->
+      <button mat-raised-button  color="secondary" routerLink="/forgot-password">Recuperar contraseña</button>
       <div class="text-center mt">
         <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
           <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20" color="accent"></mat-progress-spinner>
@@ -25,48 +24,13 @@
         </button>
       </div>
 
-
       <div class="text-center mt">
         ¿No tienes cuenta?
-        <button mat-button color="accent" type="button" (click)="toggleRegister()">Regístrate aquí</button>
-      </div>
-    </form>
-
-    <!-- FORMULARIO DE REGISTRO -->
-    <form *ngIf="showRegister" (ngSubmit)="register()" #registerForm="ngForm">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Nombre completo</mat-label>
-        <input matInput [(ngModel)]="registerName" name="registerName" required>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Correo</mat-label>
-        <input matInput type="email" [(ngModel)]="registerEmail" name="registerEmail" required>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="password" [(ngModel)]="registerPassword" name="registerPassword" required>
-      </mat-form-field>
-
-        <!-- BOTÓN REGISTRO -->
-        <div class="text-center mt">
-          <button mat-raised-button color="accent" type="submit" [disabled]="isLoading">
-            <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20" color="primary"></mat-progress-spinner>
-            <span *ngIf="!isLoading">Registrarse</span>
-          </button>
-        </div>
-
-
-      <div class="text-center mt">
-        ¿Ya tienes cuenta?
-        <button mat-button color="primary" type="button" (click)="toggleRegister()">Inicia sesión</button>
+        <button mat-button color="accent" routerLink="/register">Regístrate aquí</button>
       </div>
     </form>
   </mat-card>
 </div>
-<!-- SPINNER CARGA -->
 <div *ngIf="isLoading" class="spinner-overlay">
   <mat-spinner diameter="50"></mat-spinner>
 </div>
-

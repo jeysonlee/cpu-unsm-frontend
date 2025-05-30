@@ -12,12 +12,12 @@
         <span>Inicio</span>
       </a>
 
-      <a mat-list-item *ngIf="hasPermission(['ROLE_RECEPCIONISTA', 'ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])" routerLink="/recepciones" routerLinkActive="active">
+      <a mat-list-item *ngIf="hasPermission(['ROLE_RECEPCIONISTA', 'ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])" routerLink="/recepciones" routerLinkActive="active">
         <mat-icon>book</mat-icon>
         <span>Recepción</span>
       </a>
 
-      <a mat-list-item *ngIf="hasPermission(['ROLE_ADMINISTRADOR'])" routerLink="/usuarios" routerLinkActive="active">
+      <a mat-list-item *ngIf="hasPermission(['ACCEDER'])" routerLink="/usuarios" routerLinkActive="active">
         <mat-icon>person</mat-icon>
         <span>Usuarios</span>
       </a>

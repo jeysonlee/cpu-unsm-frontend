@@ -1,0 +1,24 @@
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mt {
+  margin-top: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
