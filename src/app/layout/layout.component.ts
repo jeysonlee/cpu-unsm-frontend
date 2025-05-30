@@ -33,13 +33,13 @@ export class LayoutComponent implements OnDestroy {
   isDashboardRoute(): boolean {
     return this.currentRoute.startsWith('/dashboard');
   }
-hasPermission(requiredPermissions: string[]): boolean {
+/* hasPermission(requiredPermissions: string[]): boolean {
   const decoded = this.authService.decodeToken();
   if (!decoded || !decoded.permissions) return false;
 
   // Ahora `permissions` ya es un array de strings como ['ACCEDER']
   return requiredPermissions.some(req => decoded.permissions.includes(req));
-}
+} */
 
   toggleMenu() {
     document.getElementById('wrapper')?.classList.toggle('toggled');
@@ -82,5 +82,22 @@ obtenerName(): string {
   const info = this.authService.getUserInfo();
   return info && info.name ? info.name : 'Invitado';
 }
+hasRole(requiredRoles: string[]): boolean {
+  const token = localStorage.getItem('token');
+  if (!token) return false;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return requiredRoles.includes(decoded.role);
+  } catch (e) {
+    return false;
+  }
+}
+hasPermission(requiredPermissions: string[]): boolean {
+  const decoded = this.authService.decodeToken();
+  if (!decoded || !decoded.permissions) return false;
+  return requiredPermissions.some(req => decoded.permissions.includes(req));
+}
+
 
 }

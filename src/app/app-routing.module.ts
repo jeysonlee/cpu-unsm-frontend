@@ -12,6 +12,7 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { VerificarCodigoGuard } from './guards/verificar-codigo.guard';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { RolComponent } from './rol/rol.component';
 //import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'usuarios', component: UsuariosComponent }
+      { path: 'usuarios', component: UsuariosComponent },
+      {path: 'roles', component: RolComponent},
     ]
   },
   { path: '**', canActivate: [RedirectGuard], component: HomeComponent }

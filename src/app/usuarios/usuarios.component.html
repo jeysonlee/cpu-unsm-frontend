@@ -26,10 +26,10 @@
     <form (ngSubmit)="saveUsuario()">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Rol</mat-label>
-        <mat-select [(ngModel)]="usuario.role" name="role">
-          <mat-option value="ADMINISTRADOR">ADMINISTRADOR DEL SISTEMA</mat-option>
-          <mat-option value="RECEPCIONISTA">RECEPCIONISTA</mat-option>
-        </mat-select>
+          <mat-select [(ngModel)]="usuario.rol" name="rol" required>
+            <mat-option *ngFor="let r of roles" [value]="r">{{ r.nombre }}</mat-option>
+          </mat-select>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">

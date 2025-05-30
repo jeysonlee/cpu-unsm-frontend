@@ -15,9 +15,12 @@
         <mat-label>Contraseña</mat-label>
         <input matInput type="password" [(ngModel)]="password" name="password" required>
       </mat-form-field>
+      <div>
+        <a routerLink="/forgot-password" routerLinkActive="active">recuperar contraseña</a>
+      </div>
 
-      <button mat-raised-button  color="secondary" routerLink="/forgot-password">Recuperar contraseña</button>
       <div class="text-center mt">
+
         <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
           <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20" color="accent"></mat-progress-spinner>
           <span *ngIf="!isLoading">Iniciar sesión</span>
@@ -29,6 +32,7 @@
         <button mat-button color="accent" routerLink="/register">Regístrate aquí</button>
       </div>
     </form>
+    
   </mat-card>
 </div>
 <div *ngIf="isLoading" class="spinner-overlay">

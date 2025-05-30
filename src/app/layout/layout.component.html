@@ -7,39 +7,67 @@
     </div>
 
     <mat-nav-list>
+      <!-- Inicio común para todos -->
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon>home</mat-icon>
         <span>Inicio</span>
       </a>
 
-      <a mat-list-item *ngIf="hasPermission(['ROLE_RECEPCIONISTA', 'ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])" routerLink="/recepciones" routerLinkActive="active">
-        <mat-icon>book</mat-icon>
-        <span>Recepción</span>
-      </a>
+<!-- Accesible solo para ADMINISTRADOR -->
+<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/usuarios" routerLinkActive="active">
+  <mat-icon>person</mat-icon>
+  <span>Gestión de Usuarios</span>
+</a>
+<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/roles" routerLinkActive="active">
+  <mat-icon>person</mat-icon>
+  <span>Gestión de Roles</span>
+</a>
 
-      <a mat-list-item *ngIf="hasPermission(['ACCEDER'])" routerLink="/usuarios" routerLinkActive="active">
-        <mat-icon>person</mat-icon>
-        <span>Usuarios</span>
-      </a>
+<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/cursos" routerLinkActive="active">
+  <mat-icon>menu_book</mat-icon>
+  <span>Gestión de Cursos</span>
+</a>
 
-      <a mat-list-item *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])" routerLink="/clientes" routerLinkActive="active">
-        <mat-icon>group</mat-icon>
-        <span>Clientes</span>
-      </a>
+<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/docentes" routerLinkActive="active">
+  <mat-icon>school</mat-icon>
+  <span>Gestión de Docentes</span>
+</a>
 
-      <!-- Menú desplegable con mat-menu -->
-      <mat-menu #reportesMenu="matMenu">
-        <button mat-menu-item routerLink="/salidas-habitacion">
-          <mat-icon>attach_money</mat-icon> Salidas
-        </button>
-        <button mat-menu-item routerLink="/lista-reservas">
-          <mat-icon>library_books</mat-icon> Reservas
-        </button>
-      </mat-menu>
-      <button mat-list-item [matMenuTriggerFor]="reportesMenu" *ngIf="hasPermission(['ROLE_ADMINISTRADOR','ROLE_ADMINISTRADOR_EMPRESA'])">
-        <mat-icon>description</mat-icon>
-        <span>Reportes</span>
-      </button>
+<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/matriculas" routerLinkActive="active">
+  <mat-icon>assignment</mat-icon>
+  <span>Gestión de Matrículas</span>
+</a>
+
+<!-- Accesible solo para CLIENTE -->
+<a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/mis-cursos" routerLinkActive="active">
+  <mat-icon>class</mat-icon>
+  <span>Mis Cursos</span>
+</a>
+
+<a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/horario" routerLinkActive="active">
+  <mat-icon>schedule</mat-icon>
+  <span>Mi Horario</span>
+</a>
+
+<a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/perfil" routerLinkActive="active">
+  <mat-icon>account_circle</mat-icon>
+  <span>Mi Perfil</span>
+</a>
+
+<!-- Reportes solo para ADMINISTRADOR -->
+<mat-menu #reportesMenu="matMenu">
+  <button mat-menu-item routerLink="/reporte-notas">
+    <mat-icon>bar_chart</mat-icon> Notas por Curso
+  </button>
+  <button mat-menu-item routerLink="/reporte-matriculas">
+    <mat-icon>folder</mat-icon> Matrículas por ciclo
+  </button>
+</mat-menu>
+<button mat-list-item [matMenuTriggerFor]="reportesMenu" *ngIf="hasRole(['ADMINISTRADOR'])">
+  <mat-icon>analytics</mat-icon>
+  <span>Reportes</span>
+</button>
+
     </mat-nav-list>
   </mat-sidenav>
 
@@ -55,10 +83,9 @@
         {{ isAuthenticated ? obtenerName() : 'Iniciar sesión' }}
       </button>
     </mat-toolbar>
-      <div>
+
+    <div>
       <router-outlet></router-outlet>
     </div>
-
   </mat-sidenav-content>
-
 </mat-sidenav-container>
