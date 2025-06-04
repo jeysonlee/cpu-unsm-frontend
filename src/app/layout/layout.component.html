@@ -1,9 +1,15 @@
+<!-- layout.component.html -->
 <mat-sidenav-container class="layout-container">
   <!-- Sidebar -->
   <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile" class="sidebar">
     <div class="sidebar-header">
       <img src="https://cpu.unsm.edu.pe/imagenes/logo.png" alt="Logo" class="logo-img">
       <div class="text-center text-light mt-2">{{ obtenerRole() }}</div>
+
+      <!-- Botón para cerrar el sidebar en móviles -->
+      <button *ngIf="isMobile" mat-icon-button (click)="sidenav.close()" class="close-sidebar-btn">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
 
     <mat-nav-list>
@@ -55,7 +61,7 @@
         <span>Mi Perfil</span>
       </a>
 
-      <!-- Reportes (submenu) -->
+      <!-- Reportes -->
       <mat-menu #reportesMenu="matMenu">
         <button mat-menu-item routerLink="/reporte-notas">
           <mat-icon>bar_chart</mat-icon>
@@ -76,11 +82,14 @@
 
   <!-- Contenido principal -->
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="mat-elevation-z4 justify-between">
-      <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isMobile">
+    <mat-toolbar color="primary" class="mat-elevation-z4 toolbar">
+      <!-- Botón para abrir el sidebar en móviles -->
+      <button mat-icon-button *ngIf="isMobile" (click)="sidenav.open()">
         <mat-icon>menu</mat-icon>
       </button>
+
       <span class="font-bold text-white">{{ title }}</span>
+
       <button mat-raised-button [color]="isAuthenticated ? 'warn' : 'accent'" (click)="isAuthenticated ? logout() : login()">
         <mat-icon>power_settings_new</mat-icon>
         {{ isAuthenticated ? obtenerName() : 'Iniciar sesión' }}

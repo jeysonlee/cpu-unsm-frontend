@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   currentYear: number = new Date().getFullYear();
-
+mobileMenuOpen = false;
   beneficios = [
     { titulo: 'Docentes especializados', descripcion: 'Equipo académico con experiencia preuniversitaria.' },
     { titulo: 'Simulacros constantes', descripcion: 'Simulacros periódicos para reforzar tu preparación.' },
@@ -16,16 +16,17 @@ export class HomeComponent {
     { titulo: 'Material actualizado', descripcion: 'Guías y recursos preparados para el examen UNSM.' },
   ];
 
-  scrollTo(id: string): void {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-  mobileMenuOpen = false;
+scrollTo(id: string) {
+  this.mobileMenuOpen = false;
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+
 
 toggleMobileMenu() {
   this.mobileMenuOpen = !this.mobileMenuOpen;
 }
+
+
 
 }
