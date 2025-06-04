@@ -52,3 +52,18 @@
   align-items: center;
   z-index: 9999;
 }
+.login-actions {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.spinner {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.google-login {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}

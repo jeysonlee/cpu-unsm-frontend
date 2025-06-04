@@ -19,16 +19,24 @@
         <a routerLink="/forgot-password" routerLinkActive="active">recuperar contraseña</a>
       </div>
 
-      <div class="text-center mt">
+      <div class="login-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+        <mat-progress-spinner
+          *ngIf="isLoading"
+          mode="indeterminate"
+          diameter="20"
+          color="accent"
+          class="spinner"
+        ></mat-progress-spinner>
+        <span *ngIf="!isLoading">Iniciar sesión</span>
+      </button>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
-          <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20" color="accent"></mat-progress-spinner>
-          <span *ngIf="!isLoading">Iniciar sesión</span>
-        </button>
-      </div>
-      <div class="text-center mt-3">
+      <div class="google-login">
         <div id="googleButton"></div>
       </div>
+    </div>
+
+
 
 
       <div class="text-center mt">

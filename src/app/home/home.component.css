@@ -52,3 +52,82 @@
   background-color: #eeeeee;
   color: #555;
 }
+/* Toolbar responsive */
+.responsive-toolbar .nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-menu-button {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .responsive-toolbar .nav-links {
+    display: none; /* Oculta los botones grandes */
+  }
+
+  .mobile-menu-button {
+    display: block; /* Muestra ícono hamburguesa */
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .card-container mat-card {
+    width: 100%; /* Full width on small screens */
+  }
+}
+.layout-container {
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  text-align: center;
+}
+
+.logo-img {
+  width: 100px;
+  height: auto;
+}
+
+.main-content {
+  padding: 16px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 8px;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .mat-toolbar .mat-icon-button {
+    margin-left: 0;
+  }
+}

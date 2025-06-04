@@ -22,4 +22,10 @@ export class HomeComponent {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   }
+  mobileMenuOpen = false;
+
+toggleMobileMenu() {
+  this.mobileMenuOpen = !this.mobileMenuOpen;
+}
+
 }

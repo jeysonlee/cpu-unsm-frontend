@@ -1,90 +1,93 @@
 <mat-sidenav-container class="layout-container">
   <!-- Sidebar -->
-  <mat-sidenav mode="side" opened class="sidebar">
+  <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile" class="sidebar">
     <div class="sidebar-header">
       <img src="https://cpu.unsm.edu.pe/imagenes/logo.png" alt="Logo" class="logo-img">
       <div class="text-center text-light mt-2">{{ obtenerRole() }}</div>
     </div>
 
     <mat-nav-list>
-      <!-- Inicio común para todos -->
+      <!-- Común para todos -->
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon>home</mat-icon>
         <span>Inicio</span>
       </a>
 
-<!-- Accesible solo para ADMINISTRADOR -->
-<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/usuarios" routerLinkActive="active">
-  <mat-icon>person</mat-icon>
-  <span>Gestión de Usuarios</span>
-</a>
-<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/roles" routerLinkActive="active">
-  <mat-icon>person</mat-icon>
-  <span>Gestión de Roles</span>
-</a>
+      <!-- ADMINISTRADOR -->
+      <a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/usuarios" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <span>Gestión de Usuarios</span>
+      </a>
 
-<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/cursos" routerLinkActive="active">
-  <mat-icon>menu_book</mat-icon>
-  <span>Gestión de Cursos</span>
-</a>
+      <a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/roles" routerLinkActive="active">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>Gestión de Roles</span>
+      </a>
 
-<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/docentes" routerLinkActive="active">
-  <mat-icon>school</mat-icon>
-  <span>Gestión de Docentes</span>
-</a>
+      <a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/cursos" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon>
+        <span>Gestión de Cursos</span>
+      </a>
 
-<a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/matriculas" routerLinkActive="active">
-  <mat-icon>assignment</mat-icon>
-  <span>Gestión de Matrículas</span>
-</a>
+      <a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/docentes" routerLinkActive="active">
+        <mat-icon>school</mat-icon>
+        <span>Gestión de Docentes</span>
+      </a>
 
-<!-- Accesible solo para CLIENTE -->
-<a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/mis-cursos" routerLinkActive="active">
-  <mat-icon>class</mat-icon>
-  <span>Mis Cursos</span>
-</a>
+      <a mat-list-item *ngIf="hasRole(['ADMINISTRADOR'])" routerLink="/matriculas" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>Gestión de Matrículas</span>
+      </a>
 
-<a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/horario" routerLinkActive="active">
-  <mat-icon>schedule</mat-icon>
-  <span>Mi Horario</span>
-</a>
+      <!-- CLIENTE -->
+      <a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/mis-cursos" routerLinkActive="active">
+        <mat-icon>class</mat-icon>
+        <span>Mis Cursos</span>
+      </a>
 
-<a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/perfil" routerLinkActive="active">
-  <mat-icon>account_circle</mat-icon>
-  <span>Mi Perfil</span>
-</a>
+      <a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/horario" routerLinkActive="active">
+        <mat-icon>schedule</mat-icon>
+        <span>Mi Horario</span>
+      </a>
 
-<!-- Reportes solo para ADMINISTRADOR -->
-<mat-menu #reportesMenu="matMenu">
-  <button mat-menu-item routerLink="/reporte-notas">
-    <mat-icon>bar_chart</mat-icon> Notas por Curso
-  </button>
-  <button mat-menu-item routerLink="/reporte-matriculas">
-    <mat-icon>folder</mat-icon> Matrículas por ciclo
-  </button>
-</mat-menu>
-<button mat-list-item [matMenuTriggerFor]="reportesMenu" *ngIf="hasRole(['ADMINISTRADOR'])">
-  <mat-icon>analytics</mat-icon>
-  <span>Reportes</span>
-</button>
+      <a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/perfil" routerLinkActive="active">
+        <mat-icon>account_circle</mat-icon>
+        <span>Mi Perfil</span>
+      </a>
 
+      <!-- Reportes (submenu) -->
+      <mat-menu #reportesMenu="matMenu">
+        <button mat-menu-item routerLink="/reporte-notas">
+          <mat-icon>bar_chart</mat-icon>
+          Notas por Curso
+        </button>
+        <button mat-menu-item routerLink="/reporte-matriculas">
+          <mat-icon>folder</mat-icon>
+          Matrículas por ciclo
+        </button>
+      </mat-menu>
+
+      <button mat-list-item [matMenuTriggerFor]="reportesMenu" *ngIf="hasRole(['ADMINISTRADOR'])">
+        <mat-icon>analytics</mat-icon>
+        <span>Reportes</span>
+      </button>
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Página principal -->
+  <!-- Contenido principal -->
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mat-elevation-z4 justify-between">
-      <button mat-icon-button (click)="toggleMenu()">
+      <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isMobile">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>{{ title }}</span>
+      <span class="font-bold text-white">{{ title }}</span>
       <button mat-raised-button [color]="isAuthenticated ? 'warn' : 'accent'" (click)="isAuthenticated ? logout() : login()">
         <mat-icon>power_settings_new</mat-icon>
         {{ isAuthenticated ? obtenerName() : 'Iniciar sesión' }}
       </button>
     </mat-toolbar>
 
-    <div>
+    <div class="main-content">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

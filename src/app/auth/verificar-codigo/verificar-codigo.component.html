@@ -13,19 +13,24 @@
     </p>
 
     <form (ngSubmit)="verifyCode()" *ngIf="!expired">
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" class="full-width code-input">
         <mat-label>Código de verificación</mat-label>
-        <input
-          matInput
-          [(ngModel)]="code"
-          name="code"
-          id="code"
-          maxlength="6"
-          required
-          inputmode="numeric"
-          placeholder="Ej. 123456"
-        />
+
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="code"
+            name="code"
+            id="code"
+            maxlength="6"
+            required
+            inputmode="text"
+            placeholder="Ej. ABC123"
+          />
+
+        <mat-hint>Se envió a tu correo electrónico</mat-hint>
       </mat-form-field>
+
 
     <div class="text-center mt">
       <button mat-raised-button color="primary" type="submit" [disabled]="expired || isLoading">

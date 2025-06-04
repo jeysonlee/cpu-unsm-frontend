@@ -1,9 +1,11 @@
+/* === CONTENEDOR PRINCIPAL === */
 .layout-container {
   height: 100vh;
 }
 
+/* === SIDEBAR === */
 .sidebar {
-  width: 240px;
+  width: 250px;
   background-color: #263238;
   color: white;
 }
@@ -16,9 +18,11 @@
 
 .logo-img {
   width: 60px;
+  height: auto;
   border-radius: 50%;
 }
 
+/* === TOOLBAR === */
 mat-toolbar {
   display: flex;
   justify-content: space-between;
@@ -30,11 +34,36 @@ mat-toolbar span {
   font-size: 1.1rem;
 }
 
+/* === CONTENIDO PRINCIPAL === */
 .main-content {
   padding: 24px;
 }
 
+/* === ITEM ACTIVO EN MENÚ === */
 mat-list-item.active {
   background-color: #455a64;
   color: #fff;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .mat-toolbar button {
+    margin-right: 8px;
+  }
+
+  .logo-img {
+    width: 50px;
+  }
+
+  mat-toolbar span {
+    font-size: 1rem;
+  }
 }

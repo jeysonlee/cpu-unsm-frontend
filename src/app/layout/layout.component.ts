@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { AuthService } from '../services/auth-service.service';
 import { jwtDecode } from 'jwt-decode';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-layout',
@@ -13,9 +15,11 @@ export class LayoutComponent implements OnDestroy {
   title = 'Centro de Universitario UNSM';
   currentRoute: string = '';
   isAuthenticated: boolean = false;
+    isMobile = false;
+  
   private routerEventsSubscription: Subscription;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private breakpointObserver: BreakpointObserver) {
     this.routerEventsSubscription = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -24,6 +28,10 @@ export class LayoutComponent implements OnDestroy {
     });
 
     this.checkAuthentication();
+        this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
   }
 
   checkAuthentication() {
