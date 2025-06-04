@@ -17,8 +17,8 @@ export interface DecodedToken {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/auth'; // Cambia esto a tu URL de API real
-  //private apiUrl = 'https://cpu-unsm-app.onrender.com/auth';
+  //private apiUrl = 'http://localhost:8080/auth'; // Cambia esto a tu URL de API real
+  private apiUrl = 'https://cpu-unsm-app.onrender.com/auth';
 
   constructor(private http: HttpClient) {}
 

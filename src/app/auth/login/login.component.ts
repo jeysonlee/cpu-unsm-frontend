@@ -23,8 +23,8 @@ export class LoginComponent {
   registerEmail: string = '';
   registerPassword: string = '';
   isLoading: boolean = false;
-  //validargogle='https://cpu-unsm-app.onrender.com/oauth2/google'
-  validargogle='http://localhost:8080/oauth2/google'; // URL de tu backend para autenticación con Google
+  validargogle='https://cpu-unsm-app.onrender.com/oauth2/google'
+  //validargogle='http://localhost:8080/oauth2/google'; // URL de tu backend para autenticación con Google
 
   constructor(private authService: AuthService, private router: Router, private http: HttpClient,private ngZone: NgZone) {}
 
