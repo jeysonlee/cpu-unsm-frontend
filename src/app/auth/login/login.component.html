@@ -26,13 +26,17 @@
           <span *ngIf="!isLoading">Iniciar sesión</span>
         </button>
       </div>
+      <div class="text-center mt-3">
+        <div id="googleButton"></div>
+      </div>
+
 
       <div class="text-center mt">
         ¿No tienes cuenta?
         <button mat-button color="accent" routerLink="/register">Regístrate aquí</button>
       </div>
     </form>
-    
+
   </mat-card>
 </div>
 <div *ngIf="isLoading" class="spinner-overlay">

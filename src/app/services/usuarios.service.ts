@@ -8,8 +8,8 @@ import { Usuario } from '../model/usuario';
 })
 export class UsuariosService {
 
-  //private apiUrl = 'http://localhost:8080/auth';
-   private apiUrl='https://cpu-unsm-app.onrender.com/auth'; // Actualiza con tu URL base
+  private apiUrl = 'http://localhost:8080/auth';
+  //private apiUrl='https://cpu-unsm-app.onrender.com/auth'; // Actualiza con tu URL base
 
   constructor(private http: HttpClient) { }
 
