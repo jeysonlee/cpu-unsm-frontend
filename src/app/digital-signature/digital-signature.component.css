@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn {
+  margin-top: 16px;
+}
+
+.file-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.file-input-wrapper label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.descripcion-panel {
+  margin-top: 32px;
+}
+
+.descripcion-contenido {
+  padding: 16px;
+}
+
+.descripcion-contenido ul {
+  padding-left: 20px;
+}
+
+.descripcion-contenido li {
+  margin-bottom: 8px;
+}

@@ -1,0 +1,124 @@
+.contenedor {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #34495e;
+}
+
+.descripcion {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.formulario label {
+  display: block;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+button {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.2rem;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1e8449;
+}
+
+.mensaje {
+  margin-top: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.mensaje.valido {
+  color: #2ecc71;
+}
+
+.mensaje.invalido {
+  color: #e74c3c;
+}
+
+.firmantes {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+}
+
+.firmante-bloque {
+  background: #dff9fb;
+  margin: 0.5rem 0;
+  padding: 0.8rem;
+  border-left: 5px solid #3498db;
+  border-radius: 5px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.custom-file-input {
+  display: none;
+}
+
+.custom-file-label {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  background-color: #edd5d5;
+  color: rgb(43, 21, 116);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
+  width: 15%;
+}
+
+.custom-file-label:hover {
+  background-color: #2980b9;
+
+}
+
+.custom-file-label i {
+  margin-right: 8px;
+}
+
+.nombre-archivo {
+  font-size: 0.95rem;
+  color: #2c3e50;
+  background: #ecf0f1;
+  padding: 0.6rem 1rem;
+  border-left: 4px solid #2ecc71;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.nombre-archivo i {
+  color: #27ae60;
+  margin-right: 6px;
+}

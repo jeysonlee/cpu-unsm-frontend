@@ -55,11 +55,28 @@
         <mat-icon>schedule</mat-icon>
         <span>Mi Horario</span>
       </a>
-
+      <a mat-list-item  routerLink="/crypto-document" routerLinkActive="active">
+        <mat-icon>security</mat-icon>
+        <span>Cifrado de Documentos</span>
+      </a>
+<!--       <a mat-list-item  routerLink="/digital-signature" routerLinkActive="active">
+        <mat-icon>security</mat-icon>
+        <span>Firma Digital</span>
+      </a> -->
+      <a mat-list-item  routerLink="/upload-firmar" routerLinkActive="active">
+        <mat-icon>security</mat-icon>
+        <span>Firmar Documento</span>
+      </a>
+      <a mat-list-item  routerLink="/verificar-firmas" routerLinkActive="active">
+        <mat-icon>security</mat-icon>
+        <span>Verificar Firmas</span>
+      </a>
       <a mat-list-item *ngIf="hasRole(['CLIENTE'])" routerLink="/perfil" routerLinkActive="active">
         <mat-icon>account_circle</mat-icon>
         <span>Mi Perfil</span>
       </a>
+
+
 
       <!-- Reportes -->
       <mat-menu #reportesMenu="matMenu">

@@ -11,15 +11,14 @@ import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { VerificarCodigoComponent } from './auth/verificar-codigo/verificar-codigo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 // Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule, MatIconAnchor, MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,11 +29,27 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { RolComponent } from './rol/rol.component';
 import { ModulosComponent } from './modulos/modulos.component';
+import { CryptoDocumetComponent } from './crypto-documet/crypto-documet.component';
+import { DigitalSignatureComponent } from './digital-signature/digital-signature.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ConfirmationDialogComponentComponent } from './confirmation-dialog-component/confirmation-dialog-component.component';
+import { UploadFirmarComponent } from './upload-firmar/upload-firmar.component';
+import { VerificarFirmasComponent } from './verificar-firmas/verificar-firmas.component';
 
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+
+// 🔐 reCAPTCHA
+import { RecaptchaModule } from 'ng-recaptcha';
+
+// 🔑 Google Login
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -50,20 +65,24 @@ import { ModulosComponent } from './modulos/modulos.component';
     ForgotPasswordComponent,
     RolComponent,
     ModulosComponent,
+    CryptoDocumetComponent,
+    DigitalSignatureComponent,
+    UserProfileComponent,
+    ConfirmationDialogComponentComponent,
+    UploadFirmarComponent,
+    VerificarFirmasComponent,
   ],
   imports: [
-
     RouterModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule, // Agrega HttpClientModule aquí
+    HttpClientModule,
     ReactiveFormsModule,
-    //BrowserAnimationsModule, // Necesario para la animación del spinner
-    //NgxSpinnerModule,
     AgGridModule,
-    BrowserAnimationsModule, // Agrega AgGridModule aquí
-       // Angular Material
+    BrowserAnimationsModule,
+
+    // Material
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
@@ -71,15 +90,41 @@ import { ModulosComponent } from './modulos/modulos.component';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatButtonModule,
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
 
+    // Extra
+    RecaptchaModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '208653476798-ag5f205v4ndok18qigvcqrgmaqp7sn86.apps.googleusercontent.com' // tu client ID
+            ),
+          },
+        ],
+        onError: (err: any) => {
+          console.error('Google Login Error:', err);
+        },
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

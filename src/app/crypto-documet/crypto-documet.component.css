@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.section {
+  flex: 1;
+  min-width: 320px;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  margin-top: 1rem;
+  background-color: #e8f5e9;
+  padding: 1rem;
+  border-radius: 6px;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.description {
+  margin-top: 2rem;
+  background-color: #e3f2fd;
+  border-left: 5px solid #1976d2;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #0d47a1;
+}
+.description h3 {
+  margin-top: 0;
+}
+.description ul {
+  padding-left: 1.2rem;
+}
+.description li {
+  margin-bottom: 0.5rem;
+}

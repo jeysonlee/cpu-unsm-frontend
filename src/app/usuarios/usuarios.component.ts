@@ -46,16 +46,19 @@ export class UsuariosComponent implements OnInit {
         onCellClicked: (params: any) => this.handleAccionUsuario(params)
       }
     ];
+    console
   }
 
   getUsuarios(): void {
     this.usuariosService.getUsuarios().subscribe(
       (data: Usuario[]) => {
         this.usuarios = data;
+          // console.log('Usuarios cargados:', this.usuarios)
       },
       error => {
         Swal.fire('Error', 'No se pudieron cargar los usuarios', 'error');
       }
+
     );
   }
 
@@ -73,6 +76,7 @@ export class UsuariosComponent implements OnInit {
           Swal.fire('Actualizado', 'Usuario actualizado exitosamente', 'success');
           this.getUsuarios();
           this.closeModal();
+          console.log('Usuario actualizado:', this.usuario);
         },
         error => Swal.fire('Error', 'No se pudo actualizar el usuario', 'error')
       );
@@ -90,6 +94,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   editUsuario(usuario: Usuario): void {
+    console.log('Editando usuario:', usuario);
     this.usuario = { ...usuario, password: '' };
     this.isEdit = true;
     this.showDialog = true;

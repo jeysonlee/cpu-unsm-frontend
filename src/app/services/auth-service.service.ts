@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import Swal from 'sweetalert2';
 
 // Interfaz exacta del JWT decodificado
 export interface DecodedToken {
@@ -9,31 +12,38 @@ export interface DecodedToken {
   id: number;
   name: string;
   sub: string;
-  permissions: string[]; // ✅ CAMBIADO AQUÍ
+  permissions: string[];
   iat: number;
   exp: number;
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   //private apiUrl = 'http://localhost:8080/auth'; // Cambia esto a tu URL de API real
-  private apiUrl = 'https://cpu-unsm-app.onrender.com/auth';
+  private apiUrl='https://cpu-unsm-app.onrender.com/auth'
 
   constructor(private http: HttpClient) {}
 
+  // Verificar si la sesión está activa
+isSessionActive(username: string, password: string): Observable<boolean> {
+  return this.http.post<boolean>(`${this.apiUrl}/session-active`, {
+    username,
+    password
+  });
+}
+
+  // Login
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/authenticate`, { username, password });
+    return this.http.post(`${this.apiUrl}/authenticate`, { username, password }).pipe(
+      catchError(error => {
+        console.error('Login failed', error);
+        Swal.fire('Error', 'Hubo un problema con la autenticación. Intenta nuevamente.', 'error');
+        return of(null); // Manejo de error para notificar al usuario
+      })
+    );
   }
 
-  verify2fa(username: string, code: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/verify-2fa`, { username, code });
-  }
-
-  registerPublicUser(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/public-register`, user);
-  }
-
+  // Métodos para manejar el token
   setToken(token: string): void {
     if (token && this.isValidJWT(token)) {
       localStorage.setItem('token', token);
@@ -45,11 +55,9 @@ export class AuthService {
     return token && this.isValidJWT(token) ? token : null;
   }
 
-  // ✅ Decodifica y devuelve todo el contenido del token
   decodeToken(): DecodedToken | null {
     const token = this.getToken();
     if (!token) return null;
-
     try {
       return jwtDecode<DecodedToken>(token);
     } catch (e) {
@@ -58,23 +66,9 @@ export class AuthService {
     }
   }
 
-  // ✅ Extrae los datos del usuario (sin perder estructura del token)
-  getUserInfo() {
-    const decoded = this.decodeToken();
-    return decoded ? {
-      id: decoded.id,
-      name: decoded.name,
-      role: decoded.role,
-      email: decoded.sub,
-      permissions: decoded.permissions
-    } : null;
-  }
-
-  // ✅ Verifica si el token es válido y no ha expirado
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (!token) return false;
-
     try {
       const decoded = jwtDecode<DecodedToken>(token);
       return Date.now() < decoded.exp * 1000;
@@ -83,32 +77,77 @@ export class AuthService {
     }
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
+logout(): void {
+  const token = localStorage.getItem('token');
+  if (token && this.isValidJWT(token)) {
+    try {
+      const decoded: DecodedToken = jwtDecode(token);
+      const username = decoded.sub;
+
+      // Llama al backend para cerrar sesión
+      this.http.post(`${this.apiUrl}/logout`, username, {
+        headers: { 'Content-Type': 'application/json' }
+      }).subscribe({
+        next: () => {
+          console.log('Sesión cerrada en el backend');
+        },
+        error: (error) => {
+          console.error('Error al cerrar sesión en backend:', error);
+        }
+      });
+    } catch (e) {
+      console.error('Error al decodificar el token:', e);
+    }
   }
 
-  getUserRole(): string | null {
-    const decodedToken = this.decodeToken();
-    return decodedToken?.role || null;
-  }
+  // Elimina el token local en todos los casos
+  localStorage.removeItem('token');
+}
 
-  // ✅ Valida si tiene estructura válida un JWT
+  // Valida si tiene estructura válida un JWT
   private isValidJWT(token: string): boolean {
     return token.includes('.') && token.split('.').length === 3;
   }
-requestPasswordReset(email: string): Observable<any> {
-  return this.http.post(`${this.apiUrl}/forgot-password`, { email });
-}
 
-validateResetCode(email: string, code: string): Observable<any> {
-  return this.http.post(`${this.apiUrl}/validate-code`, { email, code });
-}
+  // Métodos adicionales para reset de contraseña, 2FA, etc.
+  verify2fa(username: string, code: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/verify-2fa`, { username, code });
+  }
 
-updatePassword(email: string, newPassword: string): Observable<any> {
-  return this.http.post(`${this.apiUrl}/update-password`, {
-    email,
-    newPassword
-  });
+  requestPasswordReset(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  validateResetCode(email: string, code: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/validate-code`, { email, code });
+  }
+
+  updatePassword(email: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/update-password`, { email, newPassword });
+  }
+
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/${id}`);
+  }
+  registerPublicUser(user: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}/public-register`, user);
+}
+getUserRole(): string | null {
+  const decodedToken = this.decodeToken();
+  return decodedToken?.role || null;
+}
+getUserInfo() {
+  const decoded = this.decodeToken();
+  return decoded ? {
+    id: decoded.id,
+    name: decoded.name,
+    role: decoded.role,
+    email: decoded.sub,
+    permissions: decoded.permissions
+  } : null;
+}
+loginWithGoogle(idToken: string) {
+  return this.http.post<any>('/oauth2/google', { credential: idToken });
 }
 
 

@@ -1,0 +1,34 @@
+
+  <h1>🖋️ Firma Digital de Documentos PDF</h1>
+  <p class="descripcion">
+    Esta página permite realizar la firma digital de un documento PDF. El firmante envía su nombre para autenticar la firma.
+  </p>
+
+  <div class="formulario">
+    <div class="selector-archivo">
+      <label for="archivo" class="custom-file-label">
+        <i class="fas fa-file-pdf"></i> Selecciona un PDF
+      </label>
+      <input type="file" id="archivo" (change)="onFileChange($event)" accept="application/pdf" class="custom-file-input" />
+
+      <div class="nombre-archivo" *ngIf="archivo">
+        <i class="fas fa-check-circle"></i> {{ archivo.name }}
+      </div>
+    </div>
+
+
+    <label for="nombre"><i class="fas fa-user"></i> Tu nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="nombreFirmante"  disabled/>
+    <div>
+          <button (click)="firmarDocumento()"><i class="fas fa-pen-nib"></i> Firmar Documento</button>
+
+    </div>
+  </div>
+
+  <p class="mensaje">{{ mensaje }}</p>
+
+  <div *ngIf="pdfFirmadoURL" class="visor">
+    <h3>📄 Documento Firmado (Previsualización):</h3>
+    <iframe [src]="pdfFirmadoURL" type="application/pdf" width="100%" height="500px"></iframe>
+  </div>
+

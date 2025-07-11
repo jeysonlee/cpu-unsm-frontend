@@ -15,12 +15,14 @@
         <mat-label>Contraseña</mat-label>
         <input matInput type="password" [(ngModel)]="password" name="password" required>
       </mat-form-field>
-      <div>
-        <a routerLink="/forgot-password" routerLinkActive="active">recuperar contraseña</a>
-      </div>
+
+      <re-captcha
+        siteKey="6LeGNX8rAAAAAIlAbItEsVmxsMTr0YToYNNX700G"
+        (resolved)="onCaptchaResolved($event)">
+      </re-captcha>
 
       <div class="login-actions">
-      <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+      <button mat-raised-button color="primary" type="submit" [disabled]="isLoading || !captchaValido">
         <mat-progress-spinner
           *ngIf="isLoading"
           mode="indeterminate"
@@ -30,11 +32,17 @@
         ></mat-progress-spinner>
         <span *ngIf="!isLoading">Iniciar sesión</span>
       </button>
-
-      <div class="google-login">
-        <div id="googleButton"></div>
+      <div>
+        <a routerLink="/forgot-password" routerLinkActive="active">recuperar contraseña</a>
       </div>
+      <button  class="google-login" id="googleButton"  [disabled]="isLoading || !captchaValido" >
+      </button >
+
+
     </div>
+
+
+
 
 
 

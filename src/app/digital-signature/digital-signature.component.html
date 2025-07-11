@@ -1,0 +1,13 @@
+<h2>Firmar Documento PDF</h2>
+<input type="file" (change)="onFileSelected($event)">
+<input type="text" placeholder="Nombre del firmante" [(ngModel)]="name">
+<input type="password" placeholder="Contraseña" [(ngModel)]="password">
+<button (click)="signDocument()">Firmar</button>
+
+<h2>Verificar Firma</h2>
+<input type="file" (change)="onFileSelected($event)">
+<input type="file" (change)="onSignatureSelected($event)">
+<input type="password" placeholder="Contraseña" [(ngModel)]="password">
+<button (click)="verifyDocument()">Verificar</button>
+
+<p *ngIf="message">{{ message }}</p>

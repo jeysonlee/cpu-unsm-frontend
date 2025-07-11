@@ -1,0 +1,95 @@
+<div class="section">
+  <h2 class="mat-headline text-center">
+    <mat-icon>security</mat-icon> Cifrado y Descifrado de Documentos
+  </h2>
+  <p class="text-center">
+    Utiliza esta herramienta para cifrar y descifrar documentos de forma segura.
+  </p>
+<div class="container">
+  <!-- Cifrar -->
+  <div class="section">
+    <h3><mat-icon>lock</mat-icon> Cifrar documento</h3>
+
+    <!-- Selector de archivo -->
+    <div class="file-upload">
+      <label class="upload-label">
+        <input type="file" (change)="onEncryptFileChange($event)" hidden #encryptFileInput>
+        <button mat-stroked-button color="primary" (click)="encryptFileInput.click()">
+          <mat-icon>upload_file</mat-icon> Seleccionar archivo
+        </button>
+      </label>
+      <p *ngIf="encryptFileName" class="file-name">
+        <mat-icon>description</mat-icon> {{ encryptFileName.name}}
+      </p>
+    </div>
+
+    <!-- Clave -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Clave (16 caracteres)</mat-label>
+      <input matInput type="text" [(ngModel)]="encryptKey" maxlength="16">
+      <mat-icon matSuffix>vpn_key</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="encrypt()">🔐 Cifrar</button>
+
+    <div *ngIf="encryptedBlob" class="success-message">
+      <p><mat-icon color="primary">check_circle</mat-icon> Documento cifrado listo.</p>
+      <button mat-raised-button color="accent" (click)="download(encryptedBlob, 'documento_cifrado.enc')">
+        Descargar cifrado
+      </button>
+    </div>
+  </div>
+
+  <!-- Descifrar -->
+  <div class="section">
+    <h3><mat-icon>lock_open</mat-icon> Descifrar documento</h3>
+
+    <!-- Selector de archivo -->
+    <div class="file-upload">
+      <label class="upload-label">
+        <input type="file" (change)="onDecryptFileChange($event)" hidden #decryptFileInput>
+        <button mat-stroked-button color="primary" (click)="decryptFileInput.click()">
+          <mat-icon>upload_file</mat-icon> Seleccionar archivo
+        </button>
+      </label>
+      <p *ngIf="decryptFileName" class="file-name">
+        <mat-icon>description</mat-icon> {{ decryptFileName.name }}
+      </p>
+    </div>
+
+    <!-- Clave -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Clave (16 caracteres)</mat-label>
+      <input matInput type="text" [(ngModel)]="decryptKey" maxlength="16">
+      <mat-icon matSuffix>vpn_key</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="decrypt()">🔓 Descifrar</button>
+
+    <div *ngIf="decryptedBlob" class="success-message">
+      <p><mat-icon color="primary">check_circle</mat-icon> Documento descifrado listo.</p>
+      <button mat-raised-button color="accent" (click)="download(decryptedBlob, 'documento_original')">
+        Descargar original
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="section description">
+  <h3>📄 Acerca de esta herramienta</h3>
+  <p>
+    Esta herramienta permite cifrar y descifrar archivos utilizando una clave de 16 caracteres
+    mediante un algoritmo de cifrado simétrico (AES-128). Está pensada para proteger documentos sensibles
+    y asegurar su confidencialidad en tránsito o almacenamiento.
+  </p>
+  <ul>
+    <li>🔐 <strong>Cifrado:</strong> Selecciona un archivo, ingresa una clave de exactamente 16 caracteres y haz clic en "Cifrar".</li>
+    <li>🔓 <strong>Descifrado:</strong> Selecciona un archivo previamente cifrado, ingresa la misma clave usada para cifrar y haz clic en "Descifrar".</li>
+    <li>📥 Los archivos procesados estarán disponibles para descarga automática.</li>
+  </ul>
+  <p>
+    ⚠️ Asegúrate de <strong>recordar la clave utilizada</strong>. No es posible recuperar archivos cifrados si se pierde la clave.
+  </p>
+</div>
+
+</div>

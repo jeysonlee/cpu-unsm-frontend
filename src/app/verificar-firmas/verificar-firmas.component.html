@@ -1,0 +1,34 @@
+<div>
+  <h1> <i class="fa fa-search" aria-hidden="true"></i>Verificación de Documento Firmado</h1>
+  <p class="descripcion">
+    Esta página permite verificar si un archivo PDF ha sido firmado digitalmente por la aplicación.
+    Si es válido, se mostrarán los datos de los firmantes.
+  </p>
+
+  <div class="formulario">
+    <div class="selector-archivo">
+      <label for="archivo" class="custom-file-label">
+        <i class="fas fa-file-pdf"></i> Selecciona un PDF
+      </label>
+
+      <input type="file" id="archivo" (change)="onFileChange($event)" accept="application/pdf" class="custom-file-input" />
+
+      <div class="nombre-archivo" *ngIf="archivo">
+        <i class="fas fa-check-circle"></i> {{ archivo.name }}
+      </div>
+    </div>
+
+    <button (click)="verificarDocumento()"><i class="fas fa-shield-alt"></i> Verificar Documento</button>
+  </div>
+
+  <p class="mensaje" [ngClass]="{'valido': esValido, 'invalido': esValido === false}">
+    {{ mensaje }}
+  </p>
+
+  <div class="firmantes" *ngIf="firmantes.length > 0">
+    <h3> Firmantes detectados:</h3>
+    <div class="firmante-bloque" *ngFor="let firmante of firmantes">
+      <i class="fas fa-user-check"></i> {{ firmante }}
+    </div>
+  </div>
+</div>
