@@ -30,7 +30,7 @@ export class VerificarFirmasComponent {
     const formData = new FormData();
     formData.append('file', this.archivo);
 
-    this.http.post<any>('http://localhost:8080/api/documentos/verificar', formData)
+    this.http.post<any>('https://cpu-unsm-app.onrender.com/api/documentos/verificar', formData)
       .subscribe({
         next: (respuesta) => {
           this.esValido = respuesta.valido;

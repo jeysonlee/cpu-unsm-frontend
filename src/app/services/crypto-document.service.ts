@@ -25,7 +25,7 @@ decryptFile(file: File, key: string) {
   formData.append('file', file);
   formData.append('key', key);
 
-  return this.http.post('http://localhost:8080/api/decrypt', formData, {
+  return this.http.post('https://cpu-unsm-app.onrender.com/api/decrypt', formData, {
     responseType: 'blob',
     observe: 'response'
   });

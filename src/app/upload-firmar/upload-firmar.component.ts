@@ -43,7 +43,7 @@ export class UploadFirmarComponent implements OnInit {
     formData.append('file', this.archivo);
     formData.append('nombre', this.nombreFirmante);
 
-    this.http.post('http://localhost:8080/api/documentos/firmar', formData, {
+    this.http.post('https://cpu-unsm-app.onrender.com/api/documentos/firmar', formData, {
       responseType: 'blob'
     }).subscribe({
       next: (response: Blob) => {
